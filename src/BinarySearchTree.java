@@ -7,26 +7,36 @@ public class BinarySearchTree <T extends Comparable<T>>{
 
         if(root == null){// root boşsa
             root = newNode;
+            root.wordList.addFirst(root.fileName, root.wordCounter);
         } else {// root doluysa
             BSTNode<T> temp = root;// roottan childlara gezinmek için
             //root boş değilse
             while(temp != null){
+
                 if(newNode.data.compareTo(temp.data) < 0){// newNode, roottan küçük
                     if(temp.left == null){// rootun solu boş
                         temp.left = newNode;// rootun soluna eklenmeli çünkü roottan küçük
+                        temp.wordList.addFirst(temp.fileName, temp.wordCounter);
                         break;// döngüden çıkılmalı
                     }
                     temp = temp.left;// tempin solu doluysa solun soluna bakmak üzere tempi tempin solu olarak güncellenir.
-                } else if(newNode.data.compareTo(temp.data) > 0){// newNode, roottan büyük
+                }
+
+                else if(newNode.data.compareTo(temp.data) > 0){// newNode, roottan büyük
                     if(temp.right == null){// rootun sağı boş
                         temp.right = newNode;
+                        temp.wordList.addFirst(temp.fileName, temp.wordCounter);
                         break;
                     }
                     temp = temp.right;
-                } else {// newNode.data.compareTo(temp.data) == 0, eleman BST'de var
+                }
+
+                else {// newNode.data.compareTo(temp.data) == 0, eleman BST'de var
+                    temp.wordList.findFile(temp.fileName);
                     temp.wordCounter++;// aynı kelimeden kaç tane olduğunu tutabilmek için
                     break;// bu yüzden eklenmesine gerek yok döngüden çıkış
                 }
+
             }
         }
     }
