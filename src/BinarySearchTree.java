@@ -51,7 +51,7 @@ public class BinarySearchTree <T extends Comparable<T>>{
         LinkedList<T> bstTree = new LinkedList<>();
         if(node != null){// node boş değilse
             inorder(node.left);// önce sol ağaca bakılır
-            System.out.println(node.data + " ");// sonra kendi
+            System.out.print(node.data + " ");// sonra kendi
             inorder(node.right);// sonra sağ ağaca bakılır
         }
     }
@@ -95,4 +95,33 @@ public class BinarySearchTree <T extends Comparable<T>>{
             seeCounts(data.right);
         }
     }
+    // BST'de aranan kelimenin sahip olduğu linkedList'e erişme
+    public void printWordsCount(T wanted){
+        if(root != null){
+            BSTNode<T> temp = root;
+
+            while (temp != null){
+                if(temp.data.compareTo(wanted) < 0){// root'un solunda mı
+                    if(temp.left.data.equals(wanted)){// root'un solundakine mi eşit
+                        temp.left.wordList.print();// eşitse linkedList'ine eriş
+                        break;
+                    }
+                    temp = temp.left;// eşit değilse BST'de gezinme
+                } else if(temp.data.compareTo(wanted) > 0){// root'un sağında mı
+                    if(temp.right.data.equals(wanted)){// sağındakine mi eşit
+                        temp.right.wordList.print();// linkedList'ini gör
+                        break;
+                    }
+                    temp = temp.right;// gezinme
+                } else {
+                    if(temp.data.equals(wanted)){// root'a eşitse
+                        temp.wordList.print();// root'un listesi
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
 }

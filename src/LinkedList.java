@@ -25,25 +25,21 @@ public class LinkedList <T extends Comparable<T>>{
         }
     }
     public void findFile(T fileName){
-        if(head != null){
-            LinkedListNode<T> temp = head;
-            while(!head.fileName.equals(fileName)){
+        LinkedListNode<T> temp = head;
+
+        if(temp != null){
+            while(!temp.fileName.equals(fileName)){
                 temp = temp.next;
             }
+            System.out.println(temp.fileName);
         }
     }
     public void print(){
-//        LinkedListNode<T> temp = head;
-//
-//        while(temp != null){
-//            System.out.println(temp + " -> ");
-//        }
-//
-//        System.out.println("null");//?
         LinkedListNode<T> current = head;
         while (current != null) {
             System.out.print(current.fileName + " , " + current.wordCounter + " -> ");
             current = current.next;
         }
+        System.out.print("null");
     }
 }

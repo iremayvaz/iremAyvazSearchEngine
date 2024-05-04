@@ -3,13 +3,15 @@ public class Test {
         BinarySearchTree<String> tree = new BinarySearchTree<>();
         LinkedList<String> deneme = new LinkedList<>();
 
-//        deneme.addFirst("file", 2);
-//        deneme.addFirst("file2", 3);
-//        deneme.print();
+        deneme.addFirst("file", 2);
+        deneme.addFirst("file2", 3);
+        deneme.print();
+        System.out.println();
+        deneme.findFile("file");
 
-        tree.insert("apple");
-        tree.insert("account");
-        tree.insert("ambitious");
+//        tree.insert("apple");
+//        tree.insert("account");
+//        tree.insert("ambitious");
 
 //        tree.insert("first");
 //        tree.insert("case");
@@ -44,9 +46,9 @@ public class Test {
 //        tree.insert(8);
 //        tree.insert(1);
 
-        tree.inorder();
-        tree.postorder();
-        tree.preorder();
-        tree.seeCounts();
+//        tree.inorder();
+//        tree.postorder();
+//        tree.preorder();
+//        tree.seeCounts();
     }
 }
