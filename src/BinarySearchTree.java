@@ -8,23 +8,23 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
 
         if (root == null) {// root boşsa
             root = newNode;
-            root.wordList.addFirst(fileName, root.wordCounter);
+            root.wordList.addFirst((T) fileName, root.wordCounter);
         } else {// root doluysa
-            BSTNode<T> temp = root;// roottan childlara gezinmek için
+            BSTNode<T, U> temp = root;// roottan childlara gezinmek için
             //root boş değilse
             while (temp != null) {
 
                 if (newNode.data.compareTo(temp.data) < 0) {// newNode, roottan küçük
                     if (temp.left == null) {// rootun solu boş
                         temp.left = newNode;// rootun soluna eklenmeli çünkü roottan küçük
-                        temp.wordList.addFirst(fileName, temp.wordCounter);
+                        temp.wordList.addFirst((T) fileName, temp.wordCounter);
                         break;// döngüden çıkılmalı
                     }
                     temp = temp.left;// tempin solu doluysa solun soluna bakmak üzere tempi tempin solu olarak güncellenir.
                 } else if (newNode.data.compareTo(temp.data) > 0) {// newNode, roottan büyük
                     if (temp.right == null) {// rootun sağı boş
                         temp.right = newNode;
-                        temp.wordList.addFirst(fileName, temp.wordCounter);
+                        temp.wordList.addFirst((T) fileName, temp.wordCounter);
                         break;
                     }
                     temp = temp.right;
@@ -45,8 +45,8 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void inorder(BSTNode<T> node) {// bir node alınır
-        LinkedList<T> bstTree = new LinkedList<>();
+    public void inorder(BSTNode<T, U> node) {// bir node alınır
+        LinkedList<T, U> bstTree = new LinkedList<>();
         if (node != null) {// node boş değilse
             inorder(node.left);// önce sol ağaca bakılır
             System.out.print(node.data + " ");// sonra kendi
@@ -61,7 +61,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void postorder(BSTNode<T> node) {
+    public void postorder(BSTNode<T, U> node) {
         if (node != null) {
             postorder(node.left);//alınan node un önce sol ağacına
             postorder(node.right);// sonra sağ ağacına
@@ -76,7 +76,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void preorder(BSTNode<T> node) {
+    public void preorder(BSTNode<T, U> node) {
         if (node != null) {
             System.out.print(node.data + " ");// önce kendi
             preorder(node.left);// sonra sol ağacı
@@ -91,7 +91,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void seeCounts(BSTNode<T> data) {
+    public void seeCounts(BSTNode<T, U> data) {
         if (data != null) {
             System.out.print(data.wordCounter + " ");
             seeCounts(data.left);
@@ -101,7 +101,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
 
     // BST'de aranan kelimenin sahip olduğu linkedList'e erişme
     public void printWordsCount(T wanted) {
-        BSTNode<T> temp = root;
+        BSTNode<T, U> temp = root;
         while (temp != null) {
             if (temp.data.equals(wanted)) {
                 temp.wordList.print();

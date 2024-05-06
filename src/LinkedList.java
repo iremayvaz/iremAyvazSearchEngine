@@ -1,8 +1,9 @@
-public class LinkedList<T extends Comparable<T>, U> {
-    LinkedListNode<T, U> head;
+public class LinkedList<T extends Comparable<T>, Integer> {
+    LinkedListNode<T, Integer> head;
 
-    public void addFirst(T fileName, U count) {
-        LinkedListNode<T, U> newNode = new LinkedListNode<>(fileName, count);
+    //kelimelerin hangi dosyada kaç tane olduğunu her BSTNode'u için
+    public void addFirst(T fileName, int wordCount) {
+        LinkedListNode<T, Integer> newNode = new LinkedListNode<>(fileName, wordCount);
 
         if (head == null) {
             head = newNode;
@@ -12,8 +13,9 @@ public class LinkedList<T extends Comparable<T>, U> {
         }
     }
 
+    //
     public T findFile(T fileName) {
-        LinkedListNode<T, U> temp = head;
+        LinkedListNode<T, Integer> temp = head;
 
         if (temp != null) {
             while (!temp.fileName.equals(fileName)) {
@@ -23,12 +25,15 @@ public class LinkedList<T extends Comparable<T>, U> {
         return temp.fileName;
     }
 
+    //wordList linkedList'in çıktısı
     public void print() {
-        LinkedListNode<T, U> current = head;
+        LinkedListNode<T, Integer> current = head;
+
         while (current != null) {
             System.out.print("[" + current.fileName + " , " + current.wordCounter + "] -> ");
             current = current.next;
         }
+
         System.out.print("null");
     }
 }
