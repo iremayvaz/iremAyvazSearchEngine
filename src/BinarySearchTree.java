@@ -1,16 +1,16 @@
-public class BinarySearchTree<T extends Comparable<T>, U> {
-    BSTNode<T, U> root;
+public class BinarySearchTree<T extends Comparable<T>> {
+    BSTNode<T> root;
 
     //veri ekleme
-    public void insert(T data, U fileName) {
+    public void insert(T data, String fileName) {
         //eklenecek veri
-        BSTNode<T, U> newNode = new BSTNode<>(data, fileName);
+        BSTNode<T> newNode = new BSTNode<>(data, fileName);
 
         if (root == null) {// root boşsa
             root = newNode;
             root.wordList.addFirst((T) fileName, root.wordCounter);
         } else {// root doluysa
-            BSTNode<T, U> temp = root;// roottan childlara gezinmek için
+            BSTNode<T> temp = root;// roottan childlara gezinmek için
             //root boş değilse
             while (temp != null) {
 
@@ -21,6 +21,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
                         break;// döngüden çıkılmalı
                     }
                     temp = temp.left;// tempin solu doluysa solun soluna bakmak üzere tempi tempin solu olarak güncellenir.
+
                 } else if (newNode.data.compareTo(temp.data) > 0) {// newNode, roottan büyük
                     if (temp.right == null) {// rootun sağı boş
                         temp.right = newNode;
@@ -28,9 +29,20 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
                         break;
                     }
                     temp = temp.right;
+
                 } else {// newNode.data.compareTo(temp.data) == 0, eleman BST'de var
-//                    temp.wordList.findFile(temp.fileName);
-                    temp.wordCounter++;// aynı kelimeden kaç tane olduğunu tutabilmek için
+                    LinkedListNode<T, Integer> deneme = temp.wordList.head;
+
+                    if (deneme != null) {
+                        while (temp.fileName != deneme.fileName) {
+                            deneme = deneme.next;
+                        }
+                    } else {
+                        System.out.println("linkedList gezinme calismio");
+                    }
+
+                    deneme.wordCounter++;// aynı kelimeden kaç tane olduğunu tutabilmek için
+
                     break;// bu yüzden eklenmesine gerek yok döngüden çıkış
                 }
 
@@ -45,8 +57,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void inorder(BSTNode<T, U> node) {// bir node alınır
-        LinkedList<T, U> bstTree = new LinkedList<>();
+    public void inorder(BSTNode<T> node) {// bir node alınır
         if (node != null) {// node boş değilse
             inorder(node.left);// önce sol ağaca bakılır
             System.out.print(node.data + " ");// sonra kendi
@@ -61,7 +72,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void postorder(BSTNode<T, U> node) {
+    public void postorder(BSTNode<T> node) {
         if (node != null) {
             postorder(node.left);//alınan node un önce sol ağacına
             postorder(node.right);// sonra sağ ağacına
@@ -76,7 +87,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void preorder(BSTNode<T, U> node) {
+    public void preorder(BSTNode<T> node) {
         if (node != null) {
             System.out.print(node.data + " ");// önce kendi
             preorder(node.left);// sonra sol ağacı
@@ -91,7 +102,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
         System.out.println();
     }
 
-    public void seeCounts(BSTNode<T, U> data) {
+    public void seeCounts(BSTNode<T> data) {
         if (data != null) {
             System.out.print(data.wordCounter + " ");
             seeCounts(data.left);
@@ -101,7 +112,7 @@ public class BinarySearchTree<T extends Comparable<T>, U> {
 
     // BST'de aranan kelimenin sahip olduğu linkedList'e erişme
     public void printWordsCount(T wanted) {
-        BSTNode<T, U> temp = root;
+        BSTNode<T> temp = root;
         while (temp != null) {
             if (temp.data.equals(wanted)) {
                 temp.wordList.print();

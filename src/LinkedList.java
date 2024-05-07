@@ -14,7 +14,19 @@ public class LinkedList<T extends Comparable<T>, Integer> {
     }
 
     //
-    public T findFile(T fileName) {
+//    public T findFile(T fileName) {
+//        LinkedListNode<T, Integer> temp = head;
+//
+//        if (temp != null) {
+//            while (!temp.fileName.equals(fileName)) {
+//                temp = temp.next;
+//            }
+//        }
+//        return temp.fileName;
+//    }
+
+    //wordList linkedList'inden wordCounter'ını arttıracağımız node'u buluyoruz.
+    public LinkedListNode<T, Integer> findNode(T fileName) {
         LinkedListNode<T, Integer> temp = head;
 
         if (temp != null) {
@@ -22,7 +34,7 @@ public class LinkedList<T extends Comparable<T>, Integer> {
                 temp = temp.next;
             }
         }
-        return temp.fileName;
+        return temp;
     }
 
     //wordList linkedList'in çıktısı
