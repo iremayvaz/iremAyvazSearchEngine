@@ -13,9 +13,12 @@ public class Test {
 //        tree.insert("account");
 //        tree.insert("ambitious");
 
-        tree.insert("first", "A");
+        tree.insert("first", "B");
         tree.insert("wide", "A");
-        tree.insert("flanged", "A");
+        tree.insert("first", "B");
+        tree.insert("first", "A");
+//        tree.insert("wide", "B");
+        tree.insert("flanged", "B");
         tree.insert("beam", "A");
         tree.insert("convective", "A");
         tree.insert("heat", "A");
@@ -35,6 +38,7 @@ public class Test {
         tree.insert("side", "A");
         tree.insert("flat", "B");
         tree.insert("plate", "B");
+        tree.insert("first", "B");
 
 
 //        tree.insert(5);
@@ -49,9 +53,11 @@ public class Test {
         tree.inorder();
 //        tree.postorder();
 //        tree.preorder();
-        tree.seeCounts();
+        //  tree.seeCounts();
 
-        tree.printWordsCount("case");
+        // tree.printWordsCount("case");
+        //tree.root.wordList.print();
+        tree.printWordsCount("wide");
 
     }
 }

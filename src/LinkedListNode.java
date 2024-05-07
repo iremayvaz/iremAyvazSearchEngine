@@ -1,11 +1,11 @@
-public class LinkedListNode<T extends Comparable<T>, Integer> {
-    LinkedListNode<T, Integer> next;
+public class LinkedListNode<T extends Comparable<T>> {
+    LinkedListNode<T> next;
     T fileName;//data
     int wordCounter;//key
 
-    public LinkedListNode(T fileName, int wordCounter) {
+    public LinkedListNode(T fileName) {
         this.fileName = fileName;
-        this.wordCounter = wordCounter;
+        this.wordCounter = 1;
         this.next = null;
     }
 }

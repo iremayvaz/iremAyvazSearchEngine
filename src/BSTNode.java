@@ -1,17 +1,13 @@
 public class BSTNode<T extends Comparable<T>> {
     BSTNode<T> left;
     BSTNode<T> right;
-    LinkedList<T, Integer> wordList;
+    LinkedList<T> wordList;// kelime sayısı listesi
     T data;//kelime
-    String fileName;//kelimenin bulunduğu dosya
-    int wordCounter;//o dosyada kac tane var?
 
-    public BSTNode(T data, String fileName) {
+    public BSTNode(T data) {
         this.left = null;
         this.right = null;
-        this.wordList = new LinkedList<>();
+        this.wordList = new LinkedList<>();// dosya adı - kelime sıklığı listesi
         this.data = data;
-        this.fileName = fileName;
-        this.wordCounter = 1;// kelime sayısını tutabilmek için
     }
 }

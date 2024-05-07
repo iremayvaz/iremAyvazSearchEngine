@@ -4,45 +4,39 @@ public class BinarySearchTree<T extends Comparable<T>> {
     //veri ekleme
     public void insert(T data, String fileName) {
         //eklenecek veri
-        BSTNode<T> newNode = new BSTNode<>(data, fileName);
+        BSTNode<T> newNode = new BSTNode<>(data);
 
         if (root == null) {// root boşsa
             root = newNode;
-            root.wordList.addFirst((T) fileName, root.wordCounter);
+            root.wordList.addFirst((T) fileName);// dosya adı linkedList'e eklendi.
         } else {// root doluysa
             BSTNode<T> temp = root;// roottan childlara gezinmek için
             //root boş değilse
             while (temp != null) {
-
                 if (newNode.data.compareTo(temp.data) < 0) {// newNode, roottan küçük
                     if (temp.left == null) {// rootun solu boş
                         temp.left = newNode;// rootun soluna eklenmeli çünkü roottan küçük
-                        temp.wordList.addFirst((T) fileName, temp.wordCounter);
+                        temp.left.wordList.addFirst((T) fileName);
                         break;// döngüden çıkılmalı
                     }
                     temp = temp.left;// tempin solu doluysa solun soluna bakmak üzere tempi tempin solu olarak güncellenir.
 
                 } else if (newNode.data.compareTo(temp.data) > 0) {// newNode, roottan büyük
+
                     if (temp.right == null) {// rootun sağı boş
                         temp.right = newNode;
-                        temp.wordList.addFirst((T) fileName, temp.wordCounter);
+                        temp.right.wordList.addFirst((T) fileName);
                         break;
                     }
                     temp = temp.right;
 
                 } else {// newNode.data.compareTo(temp.data) == 0, eleman BST'de var
-                    LinkedListNode<T, Integer> deneme = temp.wordList.head;
 
-                    if (deneme != null) {
-                        while (temp.fileName != deneme.fileName) {
-                            deneme = deneme.next;
-                        }
+                    if (temp.wordList.head.fileName == fileName) {
+                        temp.wordList.head.wordCounter++;// aynı dosyada aynı kelimeden kaç tane olduğunu tutabilmek için
                     } else {
-                        System.out.println("linkedList gezinme calismio");
+                        temp.wordList.addFirst((T) fileName);
                     }
-
-                    deneme.wordCounter++;// aynı kelimeden kaç tane olduğunu tutabilmek için
-
                     break;// bu yüzden eklenmesine gerek yok döngüden çıkış
                 }
 
@@ -96,34 +90,37 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     // hangi kelimeden kaç tane var? for preorder to see if i did it right.
-    public void seeCounts() {
-        System.out.println("counts: ");
-        seeCounts(root);
-        System.out.println();
-    }
-
-    public void seeCounts(BSTNode<T> data) {
-        if (data != null) {
-            System.out.print(data.wordCounter + " ");
-            seeCounts(data.left);
-            seeCounts(data.right);
-        }
-    }
+//    public void seeCounts() {
+//        System.out.println("counts: ");
+//        seeCounts(root);
+//        System.out.println();
+//    }
+//
+//    public void seeCounts(BSTNode<T> data) {
+//        if (data != null) {
+//            System.out.print(data.wordCounter + " ");
+//            seeCounts(data.left);
+//            seeCounts(data.right);
+//        }
+//    }
 
     // BST'de aranan kelimenin sahip olduğu linkedList'e erişme
     public void printWordsCount(T wanted) {
         BSTNode<T> temp = root;
+
         while (temp != null) {
             if (temp.data.equals(wanted)) {
                 temp.wordList.print();
                 break;
-            } else if (temp.data.compareTo(wanted) > 0 && temp.left != null) {
+
+            } else if (temp.data.compareTo(wanted) < 0) {
                 if (temp.left.data.equals(wanted)) {
                     temp.left.wordList.print();
                     break;
                 }
                 temp = temp.left;
-            } else if (temp.data.compareTo(wanted) < 0 && temp.right != null) {
+
+            } else if (temp.data.compareTo(wanted) > 0) {
                 if (temp.right.data.equals(wanted)) {
                     temp.right.wordList.print();
                     break;
@@ -158,9 +155,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
 //                }
 //            }
 //        }
-    }
-
-    public void addWordList() {
-
     }
 }
