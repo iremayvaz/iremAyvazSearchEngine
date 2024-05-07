@@ -89,71 +89,23 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    // hangi kelimeden kaç tane var? for preorder to see if i did it right.
-//    public void seeCounts() {
-//        System.out.println("counts: ");
-//        seeCounts(root);
-//        System.out.println();
-//    }
-//
-//    public void seeCounts(BSTNode<T> data) {
-//        if (data != null) {
-//            System.out.print(data.wordCounter + " ");
-//            seeCounts(data.left);
-//            seeCounts(data.right);
-//        }
-//    }
-
     // BST'de aranan kelimenin sahip olduğu linkedList'e erişme
     public void printWordsCount(T wanted) {
         BSTNode<T> temp = root;
 
         while (temp != null) {
-            if (temp.data.equals(wanted)) {
+            int compare = wanted.compareTo(temp.data);
+
+            if (compare == 0) {
                 temp.wordList.print();
-                break;
-
-            } else if (temp.data.compareTo(wanted) < 0) {
-                if (temp.left.data.equals(wanted)) {
-                    temp.left.wordList.print();
-                    break;
-                }
+                return;
+            } else if (compare < 0) {
                 temp = temp.left;
-
-            } else if (temp.data.compareTo(wanted) > 0) {
-                if (temp.right.data.equals(wanted)) {
-                    temp.right.wordList.print();
-                    break;
-                }
+            } else { // compare > 0
                 temp = temp.right;
-            } else {
-                System.out.println("Data has not found");
-                break;
             }
         }
-//        if (root != null) {
-//            BSTNode<T> temp = root;
-//
-//            while (temp != null) {
-//                if (temp.data.compareTo(wanted) < 0) {// root'un solunda mı
-//                    if (temp.left.data.equals(wanted)) {// root'un solundakine mi eşit
-//                        temp.left.wordList.print();// eşitse linkedList'ine eriş
-//                        break;
-//                    }
-//                    temp = temp.left;// eşit değilse BST'de gezinme
-//                } else if (temp.data.compareTo(wanted) > 0) {// root'un sağında mı
-//                    if (temp.right.data.equals(wanted)) {// sağındakine mi eşit
-//                        temp.right.wordList.print();// linkedList'ini gör
-//                        break;
-//                    }
-//                    temp = temp.right;// gezinme
-//                } else {
-//                    if (temp.data.equals(wanted)) {// root'a eşitse
-//                        temp.wordList.print();// root'un listesi
-//                        break;
-//                    }
-//                }
-//            }
-//        }
+
+        System.out.println("Data not found");
     }
 }

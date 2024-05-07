@@ -4,7 +4,6 @@ public class LinkedList<T extends Comparable<T>> {
     //kelimelerin hangi dosyada kaç tane olduğunu her BSTNode'u için
     public void addFirst(T fileName) {
         LinkedListNode<T> newNode = new LinkedListNode<>(fileName);
-
         if (head == null) {
             head = newNode;
         } else {
@@ -16,7 +15,6 @@ public class LinkedList<T extends Comparable<T>> {
     //wordList linkedList'inden wordCounter'ını arttıracağımız node'u buluyoruz.
     public LinkedListNode<T> findNode(T fileName) {
         LinkedListNode<T> temp = head;
-
         if (temp != null) {
             while (!temp.fileName.equals(fileName)) {
                 temp = temp.next;
@@ -28,7 +26,6 @@ public class LinkedList<T extends Comparable<T>> {
     //wordList linkedList'in çıktısı
     public void print() {
         LinkedListNode<T> current = head;
-
         while (current != null) {
             System.out.print("[" + current.fileName + " , " + current.wordCounter + "] -> ");
             current = current.next;
